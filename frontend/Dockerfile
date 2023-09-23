@@ -6,6 +6,10 @@ WORKDIR /app
 
 COPY package.json bun.lockb ./
 
+# The VITE_ variables need to be available at build time.
+ARG VITE_API_HOSTNAME
+ENV VITE_API_HOSTNAME=$VITE_API_HOSTNAME
+
 RUN bun install
 
 COPY . .
