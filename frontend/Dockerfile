@@ -10,7 +10,7 @@ RUN bun install
 
 COPY . .
 
-RUN bun build
+RUN bun run build
 
 # Stage 2 - the production environment
 FROM nginx:latest
