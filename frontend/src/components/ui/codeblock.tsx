@@ -1,10 +1,9 @@
-// Inspired by Chatbot-UI and modified to fit the needs of this project
-// @see https://github.com/mckaywrigley/chatbot-ui/blob/main/components/Markdown/CodeBlock.tsx
-
-'use client'
-
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { FC, memo } from 'react'
+// ts ignore comment under this
+// @ts-ignore
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+// @ts-ignore
 import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 import { useCopyToClipboard } from '../../lib/hooks/use-copy-to-clipboard'
