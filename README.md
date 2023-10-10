@@ -15,3 +15,6 @@ React + Vite + Tailwind + shadcn (UI Components)
 
 # Chat Completion Streaming Starter Backend
 Bun
+
+# Function Calling
+I've provided two functions that are called on the Client side: "get_current_weather" and "alert_this_message" inside the App.tsx for examples.

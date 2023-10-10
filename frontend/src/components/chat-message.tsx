@@ -5,7 +5,7 @@ import remarkMath from 'remark-math';
 import { cn } from '../lib/utils';
 import { CodeBlock } from './ui/codeblock';
 import { MemoizedReactMarkdown } from './markdown';
-import { IconOpenAI, IconUser } from './ui/icons';
+import { IconGitHub, IconOpenAI, IconUser } from './ui/icons';
 import { ChatMessageActions } from './chat-message-actions';
 
 export interface ChatMessageProps {
@@ -13,6 +13,14 @@ export interface ChatMessageProps {
 }
 
 export function ChatMessage({ message, ...props }: ChatMessageProps) {
+    // icon can be IconUser (user), IconOpenAI (assistant), or IconGitHub (function)
+    let icon = <IconUser />;
+    if (message.role === 'assistant') {
+        icon = <IconOpenAI />;
+    } else if (message.role === 'function') {
+        icon = <IconGitHub />;
+    }
+
     return (
         <div className={cn('group relative mb-4 flex items-start md:-ml-12')} {...props}>
             <div
@@ -21,7 +29,7 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
                     message.role === 'user' ? 'bg-background' : 'bg-primary text-primary-foreground'
                 )}
             >
-                {message.role === 'user' ? <IconUser /> : <IconOpenAI />}
+                {icon}
             </div>
             <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
                 <MemoizedReactMarkdown
