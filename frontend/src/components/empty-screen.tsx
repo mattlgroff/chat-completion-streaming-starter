@@ -19,7 +19,7 @@ const exampleMessages = [
   }
 ]
 
-export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
+export function EmptyScreen({ setInput, activeModel }: Pick<UseChatHelpers, 'setInput'> & { activeModel: string }) {
   return (
     <div className="mx-auto max-w-2xl px-4">
       <div className="rounded-lg border bg-background p-8">
@@ -32,7 +32,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
           <ExternalLink href="https://bun.sh/">
             Bun
           </ExternalLink>
-          .
+          . The active model is: <strong>{activeModel}</strong>.
         </p>
         <p className="leading-normal text-muted-foreground">
           You can start a conversation here or try the following examples:

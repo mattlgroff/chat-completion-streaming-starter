@@ -1,12 +1,25 @@
-import { handleChatCompletion } from './controllers';
+import { handleOpenAIChatCompletion, handleMistralChatCompletion } from './controllers';
 
 Bun.serve({
     async fetch(req) {
         const url = new URL(req.url);
 
-        // Handle chat-completion requests
-        if (url.pathname === '/chat-completion' && req.method === 'POST') {
-            return handleChatCompletion(req);
+        if (req.method === 'OPTIONS') {
+            return new Response(null, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                },
+            });
+        }
+
+        if (url.pathname === '/openai-chat-completion' && req.method === 'POST') {
+            return handleOpenAIChatCompletion(req);
+        }
+
+        if (url.pathname === '/mistral-chat-completion' && req.method === 'POST') {
+            return handleMistralChatCompletion(req);
         }
 
         // 404 catch-all
@@ -15,6 +28,7 @@ Bun.serve({
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type',
             },
         });
     },
