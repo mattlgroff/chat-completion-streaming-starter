@@ -13,6 +13,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.1.1",
     "@mistralai/mistralai": "^0.0.7",
     "ai": "^2.2.13",
     "openai": "^4.10.0"
