@@ -1,4 +1,4 @@
-import { handleOpenAIChatCompletion, handleMistralChatCompletion } from './controllers';
+import { handleGoogleChatCompletion, handleOpenAIChatCompletion, handleMistralChatCompletion } from './controllers';
 
 Bun.serve({
     async fetch(req) {
@@ -20,6 +20,10 @@ Bun.serve({
 
         if (url.pathname === '/mistral-chat-completion' && req.method === 'POST') {
             return handleMistralChatCompletion(req);
+        }
+
+        if (url.pathname === '/google-chat-completion' && req.method === 'POST') {
+            return handleGoogleChatCompletion(req);
         }
 
         // 404 catch-all

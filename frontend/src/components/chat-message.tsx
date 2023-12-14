@@ -5,20 +5,36 @@ import remarkMath from 'remark-math';
 import { cn } from '../lib/utils';
 import { CodeBlock } from './ui/codeblock';
 import { MemoizedReactMarkdown } from './markdown';
-import { IconGitHub, IconOpenAI, IconUser } from './ui/icons';
+import { IconOpenAI, IconUser } from './ui/icons';
 import { ChatMessageActions } from './chat-message-actions';
+
+import MistralLogo from '../../src/assets/mistral.png';
+import GoogleLogo from '../../src/assets/google.png';
 
 export interface ChatMessageProps {
     message: Message;
+    activeModel: string;
 }
 
-export function ChatMessage({ message, ...props }: ChatMessageProps) {
-    // icon can be IconUser (user), IconOpenAI (assistant), or IconGitHub (function)
+export function ChatMessage({ message, activeModel, ...props }: ChatMessageProps) {
     let icon = <IconUser />;
     if (message.role === 'assistant') {
-        icon = <IconOpenAI />;
-    } else if (message.role === 'function') {
-        icon = <IconGitHub />;
+        switch (activeModel) {
+            // public/mistral.png
+            case 'Mistral Medium':
+                icon = <img src={MistralLogo} alt="Mistral Logo" height="24" width="24" />;
+                break;
+
+            // public/google.png
+            case 'Google Gemini Pro':
+                icon = <img src={GoogleLogo} alt="Google Logo" height="24" width="24" />;
+                break;
+
+            default:
+            case 'OpenAI GPT-4':
+                icon = <IconOpenAI />;
+                break;
+        }
     }
 
     return (
