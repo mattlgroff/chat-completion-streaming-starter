@@ -19,3 +19,4 @@ Bun
 # Supported Models
 - OpenAI GPT-4
 - Mistral Medium
+- Google Gemini Pro
