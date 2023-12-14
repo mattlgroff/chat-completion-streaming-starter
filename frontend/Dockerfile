@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 # Stage 1 - the build process
-FROM oven/bun:1.0.3 AS builder
+FROM --platform=linux/amd64 oven/bun:1.0.3 AS builder
 
 WORKDIR /app
 

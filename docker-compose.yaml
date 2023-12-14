@@ -1,5 +1,6 @@
 services:
   backend:
+    platform: linux/amd64
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
@@ -8,6 +9,7 @@ services:
     volumes:
       - ./backend:/app
   frontend:
+    platform: linux/amd64
     depends_on:
       - backend
     build:
