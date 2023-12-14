@@ -6,6 +6,7 @@ import { ChatPanel } from './components/chat-panel';
 import { EmptyScreen } from './components/empty-screen';
 import { ChatScrollAnchor } from './components/chat-scroll-anchor';
 import { toast } from 'react-hot-toast';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './components/ui/dropdown-menu';
 
 function App() {
     const [activeModel, setActiveModel] = useState<'OpenAI GPT-4' | 'Mistral Medium' | 'Google Gemini Pro'>('OpenAI GPT-4');
@@ -60,7 +61,7 @@ function App() {
             <div className={cn('pb-[200px] pt-4 md:pt-10')}>
                 {messages.length ? (
                     <>
-                        <ChatList messages={messages} />
+                        <ChatList messages={messages} activeModel={activeModel}/>
                         <ChatScrollAnchor trackVisibility={isLoading} />
                     </>
                 ) : (
@@ -77,35 +78,19 @@ function App() {
                 input={input}
                 setInput={setInput}
             />
-            <div className={cn('fixed bottom-4 right-4')}>
-                <button
-                    className={cn(
-                        'rounded-full bg-gray-200 py-2 px-4 text-gray-800 shadow-md',
-                        activeModel === 'OpenAI GPT-4' ? 'bg-gray-300' : 'bg-white'
-                    )}
-                    onClick={() => setActiveModel('OpenAI GPT-4')}
-                >
-                    OpenAI GPT-4
-                </button>
-                <button
-                    className={cn(
-                        'rounded-full bg-gray-200 py-2 px-4 text-gray-800 shadow-md',
-                        activeModel === 'Mistral Medium' ? 'bg-gray-300' : 'bg-white'
-                    )}
-                    onClick={() => setActiveModel('Mistral Medium')}
-                >
-                    Mistral Medium
-                </button>
-
-                <button
-                    className={cn(
-                        'rounded-full bg-gray-200 py-2 px-4 text-gray-800 shadow-md',
-                        activeModel === 'Google Gemini Pro' ? 'bg-gray-300' : 'bg-white'
-                    )}
-                    onClick={() => setActiveModel('Google Gemini Pro')}
-                >
-                    Google Gemini Pro
-                </button>
+            <div className={cn('fixed top-4 right-4')}>
+                <DropdownMenu>
+                    <DropdownMenuTrigger className={cn('rounded-full bg-gray-200 py-2 px-4 text-gray-800 shadow-md')}>
+                        {activeModel || 'Select a model'}
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent sideOffset={8} className="w-56">
+                        <DropdownMenuLabel>Models</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => setActiveModel('OpenAI GPT-4')}>OpenAI GPT-4</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setActiveModel('Mistral Medium')}>Mistral Medium</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setActiveModel('Google Gemini Pro')}>Google Gemini Pro</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
         </>
     );
